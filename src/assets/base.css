@@ -1,0 +1,51 @@
+:root {
+    --light-background: 250, 250, 250;
+    --dark-background: 24, 24, 27;
+
+    --light-primary-color: theme(colors.teal.700);
+    --dark-primary-color: theme(colors.teal.300);
+
+    --light-default-color: theme(colors.slate.700);
+    --dark-default-color: theme(colors.slate.50);
+}
+
+@layer base {
+    :root {
+        @apply bg-skin-background;
+    }
+}
+
+html {
+    --background: var(--light-background);
+    --primary-color: var(--light-primary-color);
+    --default-color: var(--light-default-color);
+}
+
+html.dark {
+    --background: var(--dark-background);
+    --primary-color: var(--dark-primary-color);
+    --default-color: var(--dark-default-color);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
+    font-weight: normal;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    font-size: 15px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
