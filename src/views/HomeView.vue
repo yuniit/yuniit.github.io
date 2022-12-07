@@ -121,7 +121,6 @@ const neonGlory = (target: HTMLElement) => {
 // Scroll
 const handleScroll = () => {
     let currentScrollPosition = window.scrollY
-    console.log('currentScrollPosition', currentScrollPosition)
 
     if (currentScrollPosition < scrollPosition.value) {
         visibleNav.value = true
@@ -190,6 +189,7 @@ onUnmounted(() => {
                 <div @click="toggleNav" class="flex md:hidden">
                     <button
                         type="button"
+                        aria-label="Menu Bar"
                         class="text-skin-default hover:text-slate-500 focus:text-slate-500 dark:hover:text-gray-200 dark:focus:text-gray-200 focus:outline-none"
                     >
                         <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
@@ -201,19 +201,30 @@ onUnmounted(() => {
                     </button>
                 </div>
 
-                <div class="md:hidden">
-                    <button
-                        class="py-1 px-2 text-white dark:text-black bg-skin-primary text-base rounded-lg hover:shadow-none focus:outline-none focus:ring-0"
+                <ul
+                    class="md:hidden flex flex-row items-center space-y-0 space-x-8 mt-0 leading-none"
+                >
+                    <li
+                        class="text-skin-default hover:text-skin-primary cursor-pointer"
                     >
-                        Resume
-                    </button>
-                </div>
+                        <button
+                            class="py-2 px-2 text-white leading-none dark:text-black bg-skin-primary text-sm rounded-lg hover:shadow-none focus:outline-none focus:ring-0"
+                        >
+                            Resume
+                        </button>
+                    </li>
+                    <li
+                        class="text-skin-default hover:text-skin-primary cursor-pointer"
+                    >
+                        <ThemeToggle :index="2" @switch="onThemeSwitch" />
+                    </li>
+                </ul>
             </div>
 
             <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
             <ul
                 :class="visibleNav && showMenu ? 'flex' : 'hidden'"
-                class="flex-col mt-8 space-y-4 md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0"
+                class="flex-col mt-8 space-y-4 md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0 leading-none"
             >
                 <li
                     @click="scrollToElement('about-me')"
@@ -237,7 +248,7 @@ onUnmounted(() => {
                     class="hidden md:block text-skin-default hover:text-skin-primary cursor-pointer"
                 >
                     <button
-                        class="py-1 px-2 text-white dark:text-black bg-skin-primary text-base rounded-lg hover:shadow-none focus:outline-none focus:ring-0"
+                        class="py-2 px-2 text-white leading-none dark:text-black bg-skin-primary text-base rounded-lg hover:shadow-none focus:outline-none focus:ring-0"
                     >
                         Resume
                     </button>
@@ -332,7 +343,7 @@ onUnmounted(() => {
                             class="w-[100%] h-[auto] max-w-[250px] max-h-[250px] border-[2px] rounded-[4px] border-skin-primary overflow-hidden"
                         >
                             <img
-                                src="/me.jpeg"
+                                src="/me.webp"
                                 width="400"
                                 height="400"
                                 alt="Me"

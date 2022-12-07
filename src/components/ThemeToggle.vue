@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import { toRefs } from 'vue'
+const props = defineProps({
+    index: {
+        type: Number,
+        default: 1,
+    },
+})
 const emit = defineEmits(['switch'])
+
+const { index } = toRefs(props)
 const switchTheme = () => {
     // Add transition for background & color
     document
@@ -10,7 +19,7 @@ const switchTheme = () => {
     localStorage.theme = localStorage.theme === 'dark' ? 'light' : 'dark'
 
     document
-        .querySelector('#theme-toggle')
+        .querySelector(`#theme-toggle-${index.value}`)
         ?.setAttribute('aria-label', localStorage.theme)
 
     // call switch on parent
@@ -20,7 +29,7 @@ const switchTheme = () => {
 
 <template>
     <button
-        id="theme-toggle"
+        :id="`theme-toggle-${index}`"
         title="Toggles light & dark"
         alt="Toggles light & dark"
         aria-label="auto"
@@ -31,9 +40,9 @@ const switchTheme = () => {
         <svg
             aria-hidden="true"
             viewBox="0 0 24 24"
-            class="sun-and-moon w-[24px] h-[24px]"
+            class="sun-and-moon w-[28px] h-[28px] md:w-[32px] md:h-[32px]"
         >
-            <mask class="moon" id="moon-mask">
+            <mask class="moon" :id="`moon-mask-${index}`">
                 <rect x="0" y="0" width="100%" height="100%" fill="white" />
                 <circle cx="24" cy="10" r="6" fill="black" />
             </mask>
@@ -42,7 +51,7 @@ const switchTheme = () => {
                 cx="12"
                 cy="12"
                 r="6"
-                mask="url(#moon-mask)"
+                :mask="`url(#moon-mask-${index})`"
                 fill="currentColor"
             />
             <g class="sun-beams" stroke="currentColor">
